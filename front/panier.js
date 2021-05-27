@@ -5,45 +5,59 @@ fetch('http://localhost:3000/api/furniture/')
 
   let container = document.querySelector(".panier .row");
 
-      container.innerHTML += `<div class="col-12 recap_commande">
-      <h2 class="recap_title">Recapitulatif de commande</h2><br>
-      <i class="fas fa-battery-half"></i><br><br>
-      <h6>Articles avec un bouton supprimer + Total prix </h6>
-        </div>
-        <div class="col-12 recap_form">
-        <form itemref="form-1">
-          <div class="form-group col-12">
-              <label for="prenom">Prénom</label>
-              <input class="form-control" type="text" placeholder="Votre Prénom" id="prenom" required>
-          </div>
-          <div class="form-group col-12">
-              <label for="nom">Nom</label>
-              <input class="form-control" type="text" placeholder="Votre Nom" id="nom" required>
-          </div>
-          <div class="form-group col-12">
-              <label for="adresse">Adresse</label>
-              <input class="form-control" type="text" placeholder="Votre Adresse" id="adresse" required>
-          </div>
-          <div class="form-group col-12">
-              <label for="ville">Ville</label>
-              <input class="form-control" type="text" placeholder="Votre Ville" id="ville" required>
-          </div>
-          <div class="form-group col-12">
-              <label for="email">Email</label>
-              <input class="form-control" type="email" placeholder="Votre Email" id="email" required>
-          </div><br>
-          <div class="button_space1">
-              <a class="button_commande" href="commande.html">
-              Commander
-              </a>
-          </div>
-          <div class="button_space">
-              <a class="button_commande" href="index.html">
-              Continuer à regarder
-              </a>
-          </div>
-        </form>
-    </div>
-    `
+    // ------- Récupérer les données du localstorage
+    // Variable enregistrement dans le local storage
+    let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
+
+    // Si panier est vide, afficher texte panier vide
+    if (produitLocalStorage === null) {
+    let panierVide = `
+        <div class="panier-vide">
+            <h2>Le panier est vide</h2>
+            <i class="fas fa-battery-empty"></i>
+        </div>`;
+        container.innerHTML = panierVide;
+    }
+    else{
+        // si panier n'est pas vide, afficher les produits
+        let produitPanier = [];
+
+        for (k = 0; k < produitLocalStorage.length; k++){            
+            produitPanier = produitPanier + `
+            <div class="recapitulatif">
+                <div class="produit_image_panier">
+                    <img src="${furniture[k].imageUrl}"></img>
+                </div>
+                <h4>${furniture[k].name}</h4>
+                <h5>${furniture[k].price / 100} €</h5>
+                <button class="bouton_supprimer">Supprimer</button>
+            </div>`;
+                container.innerHTML = produitPanier;
+        }
+    }
+
+    // Bouton suppression d'un article
+    let btn_supprimer = document.querySelector(".bouton_supprimer");
+    
+    // // Création prix total
+    // let calculPrixTotal = [];
+
+    //     // Chercher les prix dans le panier
+    //     for (let m = 0; m < produitLocalStorage.length; m++){
+    //         let prixProduitPanier = produitLocalStorage[m].price;
+
+    //         // Mettre prix des produits dans variable "prixTotal"
+    //         calculPrixTotal.push(prixProduitPanier);
+    //     }
+    //     // Additionner les prix de la variable "prixTotal" avec .reduce
+    //     let reducer = (addition, valeuractuelle) => addition + valeuractuelle;
+    //     let prixTotal = calculPrixTotal.reduce(reducer);
+    //     console.log(prixTotal);
+    //     // Html du prix total
+    //     let htmlPrixTotal = `
+    //     <h4 class="prix_total"><strong><i>Prix total: ${prixTotal}€</strong></i></h4>
+    //     `
+    //     container.insertAdjacentHTML = ("beforeend", htmlPrixTotal);
 
 });
+

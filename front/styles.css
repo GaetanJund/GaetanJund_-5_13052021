@@ -48,6 +48,15 @@ li a:hover{
 }
 
 /* Page index */
+.titre{
+    padding-bottom: 20px;
+}
+
+.titre h1, .titre h2{
+    font-weight: bold;
+    text-align: center;
+}
+
 #Furniture{
     padding: 20px;
 }
@@ -148,20 +157,34 @@ footer a:hover{
 }
 
 /* Page Panier */
-
-.recap{
-    padding: 20px;
+.panier{
+    text-align: left;
+    margin: 15px;
+    border: #F3E9F1 solid 2px;
 }
 
-.fa-battery-half{
-    color: orange;
+.recapitulatif{
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+}
+
+.panier-vide{
+    text-align: center;
+    padding: 150px;
+}
+
+.fa-battery-empty{
+    color: red;
     font-size: 30px;
 }
 
-.recap_commande{
-    text-align: center;
-    padding: 30px;
-    border: #F3E9F1 solid 2px;
+.bouton_supprimer{
+    text-decoration: none;
+    color: black;
+    background-color: orange;    
+    border: 5px solid orange;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .recap_title{
@@ -173,16 +196,17 @@ footer a:hover{
     border: #F3E9F1 solid 2px;
 }
 
+.produit_image_panier img{
+    width: 25%;
+    border-radius: 10px 10px 10px 10px;
+}
+
 .form-group, label{
     padding: 5px;
 }
 
 label{
     font-weight: bold;
-}
-
-.button_space{
-    margin-top: 20px;
 }
 
 .button_space, .button_space1{

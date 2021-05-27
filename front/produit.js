@@ -54,12 +54,6 @@ fetch('http://localhost:3000/api/furniture/' + id)
         console.log(colors);
         });
 
-        // Message ajout au panier
-        let messagePanier = document.querySelector(".ajout_panier");
-        messagePanier.addEventListener('click', function(){
-            alert("L'article a bien été ajouté à votre panier");
-        });
-
         //  ----------Ajout article au panier----------
         // Recupération des données choisies par l'utilisateur
         let idForm = document.querySelector(".choix_couleur");
@@ -72,14 +66,42 @@ fetch('http://localhost:3000/api/furniture/' + id)
             event.preventDefault();
 
                 let choixForm = idForm.value;
-            // Recuperation valeur des choix de l'utilsateur
+                // Recuperation valeur des choix de l'utilsateur
                 let optionsProduit = {
                     name : furniture.name,
                     id : furniture._id,
                     option_produit : choixForm,
                     price : furniture.price / 100,
                 }
-                console.log(optionsProduit);
-        });
-        
+                // ---------- Local Storage ----------
+                // ---------- Stocker la récupération des valeurs du formulaire dans le local storage ----------
+
+                // Message ajout au panier, ajouté à la partie si produit ou non
+                let messageConfirmation = () =>{
+                    if (window.confirm(`${furniture.name}, Couleur: ${choixForm} a été ajouté au panier.
+                    OK pour consulter le panier ou ANNULER pour continuer vos achats.`)) {
+                        window.location.href = "panier.html";
+                    }
+                    else{
+                        window.location.href = "index.html";
+                    }
+                }
+
+                // Variable enregistrement dans le local storage
+                let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
+
+                // Si il y a déjà des produits
+                if (produitLocalStorage) {
+                    produitLocalStorage.push(optionsProduit);
+                    localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+                    messageConfirmation();
+                }
+                // Si il n'y a pas de produits dans le localstorage
+                else{
+                    produitLocalStorage = [];
+                    produitLocalStorage.push(optionsProduit);
+                    localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+                    messageConfirmation();
+                }
+        });        
 });
