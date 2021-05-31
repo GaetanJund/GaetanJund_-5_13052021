@@ -69,6 +69,7 @@ fetch('http://localhost:3000/api/furniture/' + id)
                 // Recuperation valeur des choix de l'utilsateur
                 let optionsProduit = {
                     name : furniture.name,
+                    image : furniture.imageUrl,
                     id : furniture._id,
                     option_produit : choixForm,
                     price : furniture.price / 100,
