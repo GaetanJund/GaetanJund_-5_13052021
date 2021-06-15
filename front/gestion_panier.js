@@ -18,5 +18,38 @@ function enregistrementProduit(produit) {
     else{
         produitPanier.quantite += produit.quantite;
     }
-    localStorage.setItem("produit", JSON.stringify(produitLocalStorage));
+    enregistrerPanier(produitLocalStorage);
+}
+
+function prixTotalPanier() {
+    let produitLocalStorage = recuperationPanier();
+    let prixTotal = 0;
+    for (let produit of produitLocalStorage){
+        prixTotal += produit.price * produit.quantite;
+    }
+    return prixTotal;
+}
+
+function viderPanier () {
+    localStorage.removeItem("produit");
+}
+
+function enregistrerPanier (panier) {
+    localStorage.setItem("produit", JSON.stringify(panier));
+}
+
+function supprimerProduit (id,option) {
+    let produitLocalStorage = recuperationPanier();
+    produitLocalStorage = produitLocalStorage.filter( element => element.id !== id || element.option_produit !== option);
+    enregistrerPanier(produitLocalStorage);
+}
+
+function recuperationFormulaire() {
+    let produitLocalStorage = localStorage.getItem("formulaireValeurs");
+    if (!produitLocalStorage) {
+        return [];
+    }
+    else {
+        return JSON.parse(produitLocalStorage);
+    }
 }

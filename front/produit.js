@@ -24,7 +24,7 @@ fetch('http://localhost:3000/api/furniture/' + id)
                 <h5 class="card-description">${furniture.description}</h5><br><br>
             </div>
             <form>
-                <label for="option_produit">Choix de couleurs :</label>
+                <label for="option_produit">Choix du vernis :</label>
                 <select class="choix_couleur" name="colors" id="selection_couleur">
                 </select><br><br>
 
@@ -40,7 +40,7 @@ fetch('http://localhost:3000/api/furniture/' + id)
             </div>
         </div>`;
 
-        // Création selection couleur
+        // Création selection couleur (vernis)
             let choixCouleur = furniture.varnish;
             
             choixCouleur.forEach((colors) => {
@@ -76,24 +76,14 @@ fetch('http://localhost:3000/api/furniture/' + id)
                     id : furniture._id,
                     option_produit : choixForm,
                     quantite : choixQuant,
-                    price : (furniture.price * choixQuant) / 100,
+                    price : furniture.price / 100,
                 }
                 // ---------- Local Storage ----------
                 // ---------- Stocker la récupération des valeurs du formulaire dans le local storage ----------
-
-                // Message ajout au panier, ajouté à la partie si produit ou non
-                let messageConfirmation = () =>{
-                    if (window.confirm(`${furniture.name}, Couleur: ${choixForm} a été ajouté au panier.
-                    OK pour consulter le panier ou ANNULER pour continuer vos achats.`)) {
-                        window.location.href = "panier.html";
-                    }
-                    else{
-                        window.location.href = "index.html";
-                    }
-                }
                  
                 // Variable enregistrement dans le local storage
                 enregistrementProduit(optionsProduit);
-                messageConfirmation();
+                window.location.assign("panier.html");
+
         });
 });

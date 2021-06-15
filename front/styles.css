@@ -257,6 +257,14 @@ label{
     border: #F3E9F1 solid 2px;
 }
 
+.recap_commande i{
+    color: red;
+}
+
+.recap_commande p{
+    margin-bottom: -2px;
+}
+
 .fa-battery-full{
     font-size: 30px;
     color: green;
