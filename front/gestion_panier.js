@@ -53,3 +53,8 @@ function recuperationFormulaire() {
         return JSON.parse(produitLocalStorage);
     }
 }
+
+function recuperationPanierId() {
+    let produitLocalStorage = recuperationPanier();
+    return produitLocalStorage.map(produit => produit.id);
+}

@@ -75,7 +75,7 @@ fetch('http://localhost:3000/api/furniture/' + id)
                     image : furniture.imageUrl,
                     id : furniture._id,
                     option_produit : choixForm,
-                    quantite : choixQuant,
+                    quantite : parseInt(choixQuant),
                     price : furniture.price / 100,
                 }
                 // ---------- Local Storage ----------

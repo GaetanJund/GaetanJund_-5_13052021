@@ -110,7 +110,8 @@ footer a:hover{
 }
 
 /* Page Produit */
-.produit{
+#Furniture_produit{
+    padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -171,6 +172,12 @@ footer a:hover{
 .panier-vide{
     text-align: center;
     padding: 150px;
+    margin-bottom: 20px;
+}
+
+.ligne_panier2{
+    padding-top: 150px;
+    margin-bottom: -130px;
 }
 
 .fa-battery-empty{
@@ -186,9 +193,17 @@ footer a:hover{
     border-radius: 20px 20px 20px 20px;
 }
 
-.ligne_panier{
+.ligne_panier, .ligne_panier2{
     border-bottom: 8px solid #F3E9F1;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.prix_total{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
 .tout_supprimer_panier{
@@ -196,14 +211,13 @@ footer a:hover{
     border: 1px solid orange;
 }
 
-.prix_total{
-    text-align: center;
-    font-weight: bold;
-}
-
 .produit_image_panier img{
     width: 70%;
     border-radius: 10px 10px 10px 10px;
+}
+
+.formulaire{
+    padding-right: 20px;
 }
 
 .final_commande{
@@ -211,11 +225,12 @@ footer a:hover{
 }
 
 .recap_form{
-    margin: 25px;
+    margin: 10px;
     margin-bottom: 15px;
     padding-bottom: 15px;
     padding-top: 15px;
     background-color: #F3E9F1;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .form-group, label{
@@ -232,7 +247,6 @@ label{
 }
 
 .button_commande{
-    width: 50%;
     display: inline-flex;
     font-weight: bold;
     text-decoration: none;
@@ -255,6 +269,9 @@ label{
 .commande{
     padding: 20px;
     border: #F3E9F1 solid 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 5px;
 }
 
 .recap_commande i{

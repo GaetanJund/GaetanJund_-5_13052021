@@ -13,8 +13,9 @@ fetch('http://localhost:3000/api/furniture/')
     if (produitLocalStorage.length == 0) {
         let panierVide = `
             <div class="panier-vide">
-                <h2>Le panier est vide</h2>
+                <h2>Le panier est vide !</h2>
                 <i class="fas fa-battery-empty"></i>
+                <div class="ligne_panier2"></div>
             </div>`;
             container.innerHTML = panierVide;
     }
@@ -30,7 +31,7 @@ fetch('http://localhost:3000/api/furniture/')
                     <img src="${produit.image}"></img>
                 </div><br>
                 <h4><strong>${produit.name}</strong></h4>
-                <h6><i>Vernis choisi : ${produit.option_produit}</i></h6>
+                <h6><i>Vernis choisi : ${produit.option_produit}.</i></h6>
                 <h6><i>Quantité : ${produit.quantite}</i></h6><br>
                 <h5><strong>Prix unité : ${produit.price} €</strong></h5><br>
                 <button class="bouton_supprimer" data-id="${produit.id}" data-option="${produit.option_produit}">Supprimer l'article</button>
@@ -74,17 +75,19 @@ fetch('http://localhost:3000/api/furniture/')
 
     // ---------- Création formulaire ----------
     // Selection bouton du formulaire
-    let btnEnvoiFormulaire = document.querySelector("#envoi_form");
+    let formulaire = document.querySelector("#form-1");
 
     // AddEventListener
-    btnEnvoiFormulaire.addEventListener("click", () =>{
-
+    formulaire.addEventListener("submit", (e) =>{
+        e.preventDefault();
+        if (formulaire.reportValidity()){
+        
     // Récuperation des valeurs du formulaire pour les mettre dans une "key"
     let formulaireValeurs = {
-        prenom : document.querySelector("#prenom").value,
-        nom : document.querySelector("#nom").value,
-        adresse : document.querySelector("#adresse").value,
-        ville : document.querySelector("#ville").value,
+        firstName : document.querySelector("#firstName").value,
+        lastName : document.querySelector("#lastName").value,
+        address : document.querySelector("#address").value,
+        city : document.querySelector("#city").value,
         email : document.querySelector("#email").value,
     }
 
@@ -93,14 +96,29 @@ fetch('http://localhost:3000/api/furniture/')
 
     // Valeurs formulaire et produits de l'utilisateurs vers le serveur
     let envoiDonnees = ({
-        produitLocalStorage,
-        formulaireValeurs,
+        products : recuperationPanierId(),
+        contact : formulaireValeurs
     });
     console.log("Test envoi données");
     console.log(envoiDonnees);
 
-    // Envoi de l'objet vers le serveur
-    
+    fetch("http://localhost:3000/api/furniture/order", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(envoiDonnees)
+    })
+    .then(
+        result => result.json()
+    )
+    .then(
+        data => {
+            window.location.assign(`commande.html?orderId=${data.orderId}`);
+        }
+    )
+}
+   
 });
 
 });
