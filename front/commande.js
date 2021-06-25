@@ -3,10 +3,6 @@ let searchParam = (new URL(window.location)).searchParams;
 // extraire id
 let id = searchParam.get("orderId");
 
-fetch('http://localhost:3000/api/furniture')
-.then(response => response.json())
-.then(furniture => {
-
     let containerPrixTotal = document.querySelector(".commande_prixTotal");
     let produitLocalStorage = recuperationPanier();
     console.log(produitLocalStorage);
@@ -29,4 +25,3 @@ fetch('http://localhost:3000/api/furniture')
 
     // Clear tout le localStorage
     localStorage.clear();
-})

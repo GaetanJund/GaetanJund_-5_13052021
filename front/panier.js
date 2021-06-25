@@ -1,8 +1,4 @@
-// Rappel à commande
-fetch('http://localhost:3000/api/furniture/')
-.then(response => response.json())
-.then(furniture => {
-
+//   Selection classe où le code va êrte injecter
   let container = document.querySelector(".panier .row");
 
     // ------- Récupérer les données du localstorage
@@ -49,9 +45,7 @@ fetch('http://localhost:3000/api/furniture/')
     for (let l = 0; l < btn_supprimer.length; l++){
         btn_supprimer[l].addEventListener("click", (event) => {
             supprimerProduit(event.target.dataset.id,event.target.dataset.option);
-
-            // Message suppression de l'article du panier
-            window.location.assign("panier.html");
+            window.location.reload();
         });
     }
 
@@ -80,45 +74,43 @@ fetch('http://localhost:3000/api/furniture/')
     // AddEventListener
     formulaire.addEventListener("submit", (e) =>{
         e.preventDefault();
-        if (formulaire.reportValidity()){
+        if (formulaire.reportValidity()) {
         
-    // Récuperation des valeurs du formulaire pour les mettre dans une "key"
-    let formulaireValeurs = {
-        firstName : document.querySelector("#firstName").value,
-        lastName : document.querySelector("#lastName").value,
-        address : document.querySelector("#address").value,
-        city : document.querySelector("#city").value,
-        email : document.querySelector("#email").value,
-    }
+            // Récuperation des valeurs du formulaire pour les mettre dans une "key"
+            let formulaireValeurs = {
+                firstName : document.querySelector("#firstName").value,
+                lastName : document.querySelector("#lastName").value,
+                address : document.querySelector("#address").value,
+                city : document.querySelector("#city").value,
+                email : document.querySelector("#email").value,
+            }
 
-    // Mettre l'objet "formulaireValeurs" dans le localStorage via une key
-    localStorage.setItem("formulaireValeurs", JSON.stringify(formulaireValeurs));
+            // Mettre l'objet "formulaireValeurs" dans le localStorage via une key
+            localStorage.setItem("formulaireValeurs", JSON.stringify(formulaireValeurs));
 
-    // Valeurs formulaire et produits de l'utilisateurs vers le serveur
-    let envoiDonnees = ({
-        products : recuperationPanierId(),
-        contact : formulaireValeurs
-    });
-    console.log("Test envoi données");
-    console.log(envoiDonnees);
+            // Valeurs formulaire et produits de l'utilisateurs vers le serveur
+            let envoiDonnees = ({
+                products : recuperationPanierId(),
+                contact : formulaireValeurs
+            });
+            console.log("Test envoi données");
+            console.log(envoiDonnees);
 
-    fetch("http://localhost:3000/api/furniture/order", {
-        method: "POST",
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify(envoiDonnees)
-    })
-    .then(
-        result => result.json()
-    )
-    .then(
-        data => {
-            window.location.assign(`commande.html?orderId=${data.orderId}`);
-        }
-    )
+            fetch("http://localhost:3000/api/furniture/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(envoiDonnees)
+            })
+            .then(
+                result => result.json()
+            )
+            .then(
+                data => {
+                    window.location.assign(`commande.html?orderId=${data.orderId}`);
+                }
+            )
 }
    
-});
-
 });

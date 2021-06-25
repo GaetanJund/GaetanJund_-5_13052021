@@ -64,8 +64,7 @@ fetch('http://localhost:3000/api/furniture/' + id)
         let btnEnvoyerPanier = document.querySelector(".ajout_panier");
 
         // Ecouter bouton et envoyer vers le panier
-        btnEnvoyerPanier.addEventListener("click", (event) =>{
-            event.preventDefault();
+        btnEnvoyerPanier.addEventListener("click", () =>{
 
                 let choixForm = idForm.value;
                 let choixQuant = idQuantite.value;
