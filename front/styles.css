@@ -327,6 +327,6 @@ label{
 
 @media all and (min-width: 300px) and (max-width: 340px){
     .card-body img{
-        width: 250px;
+        width: 200px;
     }
 }
